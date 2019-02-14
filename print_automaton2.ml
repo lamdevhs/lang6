@@ -1,7 +1,7 @@
-let print_auto : afn -> unit =
+let print_automaton : afn -> unit =
   let map = List.map in
   let string_of_char, strlen = String.make 1, String.length in
-  (* x est-il element de la liste ys ? *)
+  (* x est-il element de la liste ys : *)
   let is_in ys x = List.exists ((=) x) ys in
   (* interval a b === [a; a+1; ...; b-1; b] *)
   let rec interval : int -> int -> int list = fun a b ->
@@ -26,7 +26,7 @@ let print_auto : afn -> unit =
     fun f default_value -> function
     | [] -> default_value 
     | x :: rest -> List.fold_left f x rest in
-  (* etats accessible a partir d'un etat en lisant une lettre *)
+  (* etats accessibles a partir d'un etat en lisant une lettre : *)
   let transits : etatN -> char -> int list =
     fun state letter ->
       try state.tN letter with
@@ -40,7 +40,7 @@ let print_auto : afn -> unit =
     | strlist -> let with_comma a b = a ^ "," ^ b
       in "{" ^ (fuse with_comma "" strlist) ^ "}" in
   (* donne le max de la taille des strings dans un tableau *)
-  (* pour chaque colonne de celui-ci *)
+  (* pour chaque colonne de celui-ci : *)
   let get_column_sizes : string list list -> int list =
     fun table -> fuse (zip max) []
       (map (map strlen) table) in
@@ -64,7 +64,7 @@ let print_auto : afn -> unit =
     let states_rows = map make_state_row all_states in
     sigma_row :: states_rows in
   (* bourre les cases de la table avec des espaces pour *)
-  (* avoir un affichage regulier. *)
+  (* avoir un affichage regulier : *)
   let format_table
   : int -> string list list -> string list list =
     fun margin table ->
